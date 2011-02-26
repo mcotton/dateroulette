@@ -36,6 +36,22 @@ app.get('/', function(req, res){
   });
 });
 
+app.get('/signup', function(req, res){
+  res.render('signup', {
+    locals: {
+      title: 'Signup'
+    }
+  });
+});
+
+app.get('/signup_submit', function(req, res){
+  res.render('signup_submit', {
+    locals: {
+      title: 'Signup '
+    }
+  });
+});
+
 // Only listen on $ node app.js
 
 if (!module.parent) {
