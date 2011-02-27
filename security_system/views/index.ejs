@@ -1,0 +1,54 @@
+<style type="text/css">
+    .image_container {
+    background-image:url('/images/floorplan2.gif');
+    width: 875px;
+    height: 737px;
+    }
+    .lock_overlays {
+        position: absolute;
+        z-index:100;
+    }
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var num_zones = 0;
+    var all_zones = [];
+    var max_zones = 6;
+
+   $("#theimg").click(function(e){
+        if (num_zones < max_zones) {
+            var curr = $('#coords').html();
+            var newzone = "<div>zone:"+ num_zones + " (" + e.pageX + "," + e.pageY + ") </div>";
+            $('#coords').html(curr + newzone);
+            var zone_id = "zone" + num_zones;
+            var new_zone = '<img src="/images/lock_icon_green.gif" class="lock_overlays" id="'+zone_id+'" />';
+            $('#theimg').html($('#theimg').html() + new_zone);
+            $("#"+zone_id).css("left", e.pageX-23);
+            $("#"+zone_id).css("top", e.pageY-21);
+            all_zones[num_zones] = {'x': e.pageX, 'y':e.pageY};
+            num_zones++;
+        }
+   });
+
+   $("#display").click(function() {
+    var str = "";
+    for (i=0; i<all_zones.length; i++) {
+        str += all_zones[i].x + "," + all_zones[i].y + "\n";
+    }
+    alert(str);
+    });
+});
+</script>
+
+
+<div class="image_container" id="theimg">
+</div>
+<br/><br/>
+<fieldset style="width: 400px">
+    <legend>zones</legend>
+    <div id="coords">
+    </div>
+</fieldset>
+
+<input type="button" id="display" value="xxxx" />
