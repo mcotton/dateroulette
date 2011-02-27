@@ -19,11 +19,11 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler());
 });
 
 // Routes
@@ -35,6 +35,36 @@ app.get('/', function(req, res){
     }
   });
 });
+
+app.get('/upload', function(req, res){
+  res.render('upload', {
+    locals: {
+      title: 'Express'
+    }
+  });
+});
+
+app.post('/do_upload', function(req, res){
+    console.log('do the damn upload');
+});
+
+app.get('/design', function(req, res){
+  res.render('design', {
+    locals: {
+      title: 'Express'
+    }
+  });
+});
+
+app.get('/monitor', function(req, res){
+  res.render('monitor', {
+    locals: {
+      title: 'Express'
+    }
+  });
+});
+
+
 
 // Only listen on $ node app.js
 
