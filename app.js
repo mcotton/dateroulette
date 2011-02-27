@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-
+var fs = require('fs');
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -30,26 +30,31 @@ app.configure('production', function(){
 
 app.get('/', function(req, res){
   res.render('index', {
-    locals: {
-      title: 'Express'
-    }
+    locals: {title: 'Express'}
   });
 });
 
 app.get('/signup', function(req, res){
   res.render('signup', {
-    locals: {
-      title: 'Signup'
-    }
+    locals: {title: 'Signup'}
   });
 });
 
-app.get('/signup_submit', function(req, res){
+app.post('/signup_submit', function(req, res){
   res.render('signup_submit', {
-    locals: {
-      title: 'Signup '
-    }
+    locals: { title: 'Signup', }
   });
+
+ console.log(req.body);
+
+	var data = req.body.email+"\n";
+
+	fs.open('/tmp/signup.data.txt', "a", 0744, function (err, fd) {
+	    if (err) throw err;
+	    fs.write(fd, data, null, 'utf8', function (err, written) {
+		if (err) throw err;
+	    });
+	});
 });
 
 app.get('/demo', function(req, res)  {
