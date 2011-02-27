@@ -4,6 +4,9 @@
  */
 
 var express = require('express');
+var sys = require("sys");
+var fs = require("fs");
+var formidable = require('formidable');
 
 var app = module.exports = express.createServer();
 
@@ -45,7 +48,23 @@ app.get('/upload', function(req, res){
 });
 
 app.post('/do_upload', function(req, res){
-    console.log('do the damn upload');
+    console.log('starting upload');
+
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        /*
+        res.writeHead(200, {'content-type': 'text/plain'});
+        res.write('received upload:\n\n');
+        res.end(sys.inspect({fields: fields, files: files}));
+        */
+        var uploaded_file = sys.inspect(files['uploaded_floorlpan']['path'])
+        fs.writeFile("/tmp/data.uploaded_file.txt", uploaded_file, function(err) {
+            if(err) { sys.puts(err); }
+        });
+        console.log(">>>>>>>" + uploaded_file);
+    });
+    console.log('upload done');
+    res.redirect('/');
 });
 
 app.get('/design', function(req, res){
