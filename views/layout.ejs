@@ -10,6 +10,7 @@
 	<title>DateRoulette - no dicks allowed</title>
 	<script src='/javascript/jquery.js'></script>
 	<script src='/javascript/media.js'></script>
+	<script type="text/javascript" src="/javascript/jquery.spriteTimer-1.3.6.js"></script>
 </head>
 <body>
 	<div class="wrap background">
@@ -32,17 +33,29 @@
 	   var movies = ['/images/Girl1.m4v', '/images/Girl2.m4v', '/images/Girl3.m4v', '/images/Girl4.m4v'];
 	   var counter = 1;
 	   	   
-        $("#up").click(function(event){
-            
-        });
+        $("#up").click(function(event){});
         
         $("#down").click(function(event){
             //alert(counter + '    ' + movies[counter]);
-            $('#movie').html('<embed src="' + movies[counter] + '" autostart="true"  width="320" height="240"></embed>');
+            if (counter < 4 )  {
+                $('#movie').html('<embed src="' + movies[counter] + '" autostart="true"  width="320" height="240"></embed>');
+            } 
+            else {
+                counter = 0;
+                $('#movie').html('<embed src="' + movies[counter] + '" autostart="true"  width="320" height="240"></embed>');
+            }
             counter++
         });
 	
 	});
+	
+	$('.exampleA .timer').spriteTimer({
+   'seconds': 180,
+   'isCountDown': true,
+   'digitImagePath': '/images/numbers.png',
+   'callback': ''
+});
+	
 	</script>
 </body>
 </html>
