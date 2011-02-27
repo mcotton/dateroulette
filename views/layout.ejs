@@ -29,17 +29,20 @@
 	<script>
 	$(document).ready(function() {
 	
-	   console.log($('side embed').attr('src'));
-	   
+	   var movies = ['/images/Girl1.m4v', '/images/Girl2.m4v', '/images/Girl3.m4v', '/images/Girl4.m4v'];
+	   var counter = 1;
+	   	   
         $("#up").click(function(event){
             
         });
         
         $("#down").click(function(event){
-            alert("Not");
+            //alert(counter + '    ' + movies[counter]);
+            $('#movie').html('<embed src="' + movies[counter] + '" autostart="true"  width="320" height="240"></embed>');
+            counter++
         });
 	
-	})
+	});
 	</script>
 </body>
 </html>
