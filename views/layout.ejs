@@ -37,6 +37,7 @@
         
         $("#down").click(function(event){
             //alert(counter + '    ' + movies[counter]);
+            startTimer();
             if (counter < 4 )  {
                 $('#movie').html('<embed src="' + movies[counter] + '" autostart="true"  width="320" height="240"></embed>');
             } 
@@ -49,12 +50,19 @@
 	
 	});
 	
-	$('.exampleA .timer').spriteTimer({
-   'seconds': 180,
-   'isCountDown': true,
-   'digitImagePath': '/images/numbers.png',
-   'callback': ''
-});
+	startTimer();
+	
+	function startTimer() {
+	   $('.exampleA .timer').text('');
+	   $('.exampleA .timer').spriteTimer({
+       'seconds': 180,
+        'isCountDown': true,
+        'digitImagePath': '/images/numbers.png',
+        'callback': ''
+        });
+	
+	}
+
 	
 	</script>
 </body>
